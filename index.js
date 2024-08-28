@@ -25,6 +25,7 @@ const typeDefs = /* GraphQL */ `
 
   type Mutation {
     payOrder(orderId: ID!): Order
+    resetOrders: [Order]
   }
 
   schema {
@@ -33,7 +34,7 @@ const typeDefs = /* GraphQL */ `
   }
 `
 
-const orders = [
+const initialOrders = [
   {
     id: '1',
     merchantName: 'Amazon',
@@ -84,6 +85,9 @@ const orders = [
   },
 ]
 
+// Copy the initial orders to be used for reset
+let orders = [...initialOrders]
+
 const resolvers = {
   Query: {
     orders() {
@@ -103,6 +107,11 @@ const resolvers = {
       order.status = 'completed'
       return order
     },
+    resetOrders() {
+      // Reset the orders array to the initial state
+      orders = [...initialOrders]
+      return orders
+    },
   },
 }
 
@@ -116,7 +125,7 @@ const yoga = createYoga({
 })
 
 const server = createServer(yoga)
-const port = process.env.PORT || 4000
+const port = 4000
 
 server.listen(port, () => {
   console.log(`Yoga is listening at http://localhost:${port}/graphql`)
