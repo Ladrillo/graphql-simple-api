@@ -116,7 +116,8 @@ const yoga = createYoga({
 })
 
 const server = createServer(yoga)
+const port = process.env.PORT || 4000
 
-server.listen(process.env.PORT || 4000, () => {
-  console.log('Yoga is listening at http://localhost:4000/graphql')
+server.listen(port, () => {
+  console.log(`Yoga is listening at http://localhost:${port}/graphql`)
 })
