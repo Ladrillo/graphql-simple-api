@@ -33,60 +33,60 @@ const typeDefs = /* GraphQL */ `
     mutation: Mutation
   }
 `
+const order1 = {
+  id: '1',
+  merchantName: 'Amazon',
+  merchantImage:
+    'https://res.cloudinary.com/caskchain/image/upload/v1717158058/Sequra/amazon.png',
+  merchantLogo:
+    'https://cdn.iconscout.com/icon/free/png-512/free-amazon-1543560-1306063.png',
+  date: '2021-10-01',
+  nextDueAmount: 100,
+  nextDueDate: '2021-11-01',
+  status: 'pending',
+  reference: '123456789',
+  price: 100,
+  numberOfArticles: 5,
+  shippedArticles: 2,
+}
 
-const initialOrders = [
-  {
-    id: '1',
-    merchantName: 'Amazon',
-    merchantImage:
-      'https://res.cloudinary.com/caskchain/image/upload/v1717158058/Sequra/amazon.png',
-    merchantLogo:
-      'https://cdn.iconscout.com/icon/free/png-512/free-amazon-1543560-1306063.png',
-    date: '2021-10-01',
-    nextDueAmount: 100,
-    nextDueDate: '2021-11-01',
-    status: 'pending',
-    reference: '123456789',
-    price: 100,
-    numberOfArticles: 5,
-    shippedArticles: 2,
-  },
-  {
-    id: '2',
-    merchantName: 'Ebay',
-    merchantImage:
-      'https://res.cloudinary.com/caskchain/image/upload/v1717158059/Sequra/ebay.png',
-    merchantLogo:
-      'https://cdn.iconscout.com/icon/free/png-512/free-ebay-13-675708.png',
-    date: '2021-10-01',
-    nextDueAmount: 200,
-    nextDueDate: '2021-11-01',
-    status: 'completed',
-    reference: '987654321',
-    price: 200,
-    numberOfArticles: 10,
-    shippedArticles: 5,
-  },
-  {
-    id: '3',
-    merchantName: 'Costco',
-    merchantImage:
-      'https://res.cloudinary.com/caskchain/image/upload/v1717158062/Sequra/costco.png',
-    merchantLogo:
-      'https://cdn.iconscout.com/icon/free/png-512/free-costco-282448.png',
-    date: '2023-05-30',
-    nextDueAmount: 300,
-    nextDueDate: '2024-11-01',
-    status: 'pending',
-    reference: '123456777',
-    price: 300,
-    numberOfArticles: 15,
-    shippedArticles: 7,
-  },
-]
+const order2 = {
+  id: '2',
+  merchantName: 'Ebay',
+  merchantImage:
+    'https://res.cloudinary.com/caskchain/image/upload/v1717158059/Sequra/ebay.png',
+  merchantLogo:
+    'https://cdn.iconscout.com/icon/free/png-512/free-ebay-13-675708.png',
+  date: '2021-10-01',
+  nextDueAmount: 200,
+  nextDueDate: '2021-11-01',
+  status: 'completed',
+  reference: '987654321',
+  price: 200,
+  numberOfArticles: 10,
+  shippedArticles: 5,
+}
 
-// Copy the initial orders to be used for reset
-let orders = [...initialOrders]
+const order3 = {
+  id: '3',
+  merchantName: 'Costco',
+  merchantImage:
+    'https://res.cloudinary.com/caskchain/image/upload/v1717158062/Sequra/costco.png',
+  merchantLogo:
+    'https://cdn.iconscout.com/icon/free/png-512/free-costco-282448.png',
+  date: '2023-05-30',
+  nextDueAmount: 300,
+  nextDueDate: '2024-11-01',
+  status: 'pending',
+  reference: '123456777',
+  price: 300,
+  numberOfArticles: 15,
+  shippedArticles: 7,
+}
+
+const getInitialOrders = () => ([{ ...order1 }, { ...order2 }, { ...order3 }])
+
+let orders = getInitialOrders()
 
 const resolvers = {
   Query: {
@@ -108,8 +108,7 @@ const resolvers = {
       return order
     },
     resetOrders() {
-      // Reset the orders array to the initial state
-      orders = [...initialOrders]
+      orders = getInitialOrders()
       return orders
     },
   },
